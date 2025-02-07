@@ -1,4 +1,4 @@
-<img src="https://images.seeklogo.com/logo-png/39/2/taskade-logo-png_seeklogo-399416.png" alt="Logo" width="100vw" height="100vh">
+<img src="{{ asset('images/logo/logo.png') }}" alt="Logo" width="100vw" height="100vh">
 
 {{-- <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" width="200" height="100"> --}}
 

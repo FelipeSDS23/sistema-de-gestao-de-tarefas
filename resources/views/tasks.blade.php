@@ -16,9 +16,9 @@
                     <p>Data de Cadastro: {{ auth()->user()->created_at->format('d/m/Y') }}</p>
 
                     <div class="container mx-auto mt-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-4">
                             <!-- Card 1 -->
-                            <div class="bg-pink-500 text-white p-6 rounded-lg shadow-lg">
+                            <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg">
                                 <h5 class="text-xl font-semibold">Card 1</h5>
                                 <p>Conteúdo do card 1</p>
                             </div>
