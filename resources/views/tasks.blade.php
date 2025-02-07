@@ -10,27 +10,92 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h2>Gerenciar Tarefas</h2>
+                    {{-- <h2>Gerenciar Tarefas</h2>
                     <p>Bem-vindo, {{ Auth::user()->name }}</p>
                     <p>Email: {{ auth()->user()->email }}</p>
-                    <p>Data de Cadastro: {{ auth()->user()->created_at->format('d/m/Y') }}</p>
+                    <p>Data de Cadastro: {{ auth()->user()->created_at->format('d/m/Y') }}</p> --}}
+                    
+                    <div class="flex justify-between align-center">
+                    {{-- Filters --}}
+                        <form>
+                            <label for="filtro">
+                                <span class="material-symbols-outlined">filter_list</span>
+                            </label>
+                            <select id="filtro" name="filtro" class="w-0 h-10">
+                                <option value=""></option>
+                                <option value="status">Status</option>
+                                <option value="categoria">Categoria</option>
+                                <option value="data-criacao-mais-antigo">Data de criação (Mais antigo)</option>
+                                <option value="data-criacao-mais-recente">Data de criação (Mais recente)</option>
+                            </select>
+                            <button type="submit" class="bg-blue-500 px-3 h-10 text-white">
+                                Aplicar
+                            </button>
+                        </form>
+
+                        <div>
+                            <a href="#">
+                                <button class="bg-blue-500 px-3 h-10 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                    Nova tarefa
+                                    <span class="material-symbols-outlined px-2">add_circle</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
 
                     <div class="container mx-auto mt-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-4">
+
+                            
                             <!-- Card 1 -->
-                            <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg">
-                                <h5 class="text-xl font-semibold">Card 1</h5>
-                                <p>Conteúdo do card 1</p>
+                            <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg flex justify-between align-center  transform hover:translate-y-[-5px] transition duration-300">
+                                <div>
+                                    <h5 class="my-1 text-xl font-semibold">Estudar alemão</h5>
+                                    <p class="my-1">Status: Pendênte</p>
+                                    <p class="my-1">Categoria</p>
+                                    <p class="my-1">Criada em: 12/01/2024</p>
+                                    <p class="my-1">Expira em: 20/01/2024</p>
+                                </div>
+                                <div>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
+                                </div>
                             </div>
+
+
+
+
+
                             <!-- Card 2 -->
-                            <div class="bg-pink-500 text-white p-6 rounded-lg shadow-lg">
-                                <h5 class="text-xl font-semibold">Card 2</h5>
-                                <p>Conteúdo do card 2</p>
+                            <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg flex justify-between align-center  transform hover:translate-y-[-5px] transition duration-300">
+                                <div>
+                                    <h5 class="my-1 text-xl font-semibold">Estudar alemão</h5>
+                                    <p class="my-1">Status: Pendênte</p>
+                                    <p class="my-1">Categoria</p>
+                                    <p class="my-1">Criada em: 12/01/2024</p>
+                                    <p class="my-1">Expira em: 20/01/2024</p>
+                                </div>
+                                <div>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
+                                </div>
                             </div>
                             <!-- Card 3 -->
-                            <div class="bg-pink-500 text-white p-6 rounded-lg shadow-lg">
-                                <h5 class="text-xl font-semibold">Card 3</h5>
-                                <p>Conteúdo do card 3</p>
+                            <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg flex justify-between align-center  transform hover:translate-y-[-5px] transition duration-300">
+                                <div>
+                                    <h5 class="my-1 text-xl font-semibold">Estudar alemão</h5>
+                                    <p class="my-1">Status: Pendênte</p>
+                                    <p class="my-1">Categoria</p>
+                                    <p class="my-1">Criada em: 12/01/2024</p>
+                                    <p class="my-1">Expira em: 20/01/2024</p>
+                                </div>
+                                <div>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
+                                </div>
                             </div>
                             <!-- Card 4 -->
                             <div class="bg-pink-500 text-white p-6 rounded-lg shadow-lg">

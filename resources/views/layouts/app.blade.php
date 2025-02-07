@@ -14,6 +14,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        {{-- Google icons --}}
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
         {{-- Meu Tailwind CSS --}}
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
