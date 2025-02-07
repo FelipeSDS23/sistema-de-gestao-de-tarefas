@@ -34,7 +34,7 @@
                         </form>
 
                         <div>
-                            <a href="#">
+                            <a href="{{ route('dashboard.create') }}">
                                 <button class="bg-blue-500 px-3 h-10 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
                                     Nova tarefa
                                     <span class="material-symbols-outlined px-2">add_circle</span>

@@ -21,6 +21,10 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function() {
     Route::get('/config', function() {
         return view('config');
     })->name('dashboard.config');
+
+    Route::get('/create', function() {
+        return view('create');
+    })->name('dashboard.create');
 });
 
 // Authentication routes
