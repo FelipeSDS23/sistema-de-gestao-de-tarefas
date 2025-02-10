@@ -33,6 +33,12 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        // Updates the user with the request data
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ];
+
         // Checks if the user uploaded a profile photo
         if($request->hasFile('image')) {
             // Deletes the old image if it exists
@@ -46,20 +52,13 @@ class ProfileController extends Controller
             $imageUniqueName = uniqid('profile_', true) . '.' . $image->getClientOriginalExtension();
             // Saves to the storage/app/public/profile_pictures folder
             $uploadedFiles = $image->storeAs('profile_pictures', $imageUniqueName);
+
+            // Updates the user with the request data (including the unique name of the image, if it has been changed
+            $data['image'] = $imageUniqueName;
         }
-
-        // Access the authenticated user
-        $user = $request->user();
-
-        // Updates the user with the request data (including the unique name of the image, if it has been changed
-        $data = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'image' => $imageUniqueName
-        ];
     
         // Updates the user with the data in the associative array
-        $user->update($data);
+        $request->user()->update($data);
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -74,6 +73,12 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+        // Deletes the old image
+        if ($user->image != 'default.jpg') {
+            // The old image path is stored in the database
+            Storage::delete('profile_pictures/' . $request->user()->image);  // Remove a imagem antiga
+        }
 
         Auth::logout();
 
