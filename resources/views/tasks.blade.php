@@ -18,6 +18,7 @@
                     <div class="flex justify-between align-center">
                     {{-- Filters --}}
                         <form>
+                            @csrf
                             <label for="filtro">
                                 <span class="material-symbols-outlined">filter_list</span>
                             </label>

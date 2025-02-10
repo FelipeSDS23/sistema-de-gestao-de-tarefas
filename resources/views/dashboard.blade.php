@@ -33,7 +33,7 @@
                     <div class="flex items-center justify-center sm:justify-start space-x-4">
                         <!-- Imagem do usuário -->
                         <div>
-                          <img src="{{ asset('images/profile/teste-profile.jpg') }}" alt="Profile" class="profile-photo">
+                          <img src="{{ asset('images/profile_pictures/teste-profile.jpg') }}" alt="Profile" class="profile-photo">
                         </div>
                         
                         <!-- Texto ao lado da imagem -->

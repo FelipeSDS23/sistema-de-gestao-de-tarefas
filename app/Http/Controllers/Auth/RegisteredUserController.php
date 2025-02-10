@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -32,12 +33,24 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        // Checks if the user uploaded a profile photo
+        if($request->file('file')) {
+            // Gets the uploaded file
+            $image = $request->file('file');
+            // Create a unique name
+            $imageUniqueName = uniqid('profile_', true) . '.' . $image->getClientOriginalExtension();
+            // Saves to the storage/app/public/profile_pictures folder
+            $uploadedFiles = $image->storeAs('profile_pictures', $imageUniqueName);
+        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'image' => $imageUniqueName ?? 'default.jpg',
             'password' => Hash::make($request->password),
         ]);
 

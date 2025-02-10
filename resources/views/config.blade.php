@@ -12,6 +12,7 @@
 
                     <h2 class="text-2xl font-semibold text-center mb-6">Configurações</h2>
                     <form action="/atualizar-configuracoes" method="POST">
+                        @csrf
                         <div class="mb-6">
                             <label for="receber_email" class="inline-flex items-center text-sm font-medium text-gray-700">
                                 <input type="checkbox" id="receber_email" name="receber_email" class="form-checkbox h-5 w-5 text-blue-500 focus:ring-blue-500" checked />
