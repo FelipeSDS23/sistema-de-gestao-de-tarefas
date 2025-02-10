@@ -13,7 +13,8 @@
                     {{-- <h2>Gerenciar Tarefas</h2>
                     <p>Bem-vindo, {{ Auth::user()->name }}</p>
                     <p>Email: {{ auth()->user()->email }}</p>
-                    <p>Data de Cadastro: {{ auth()->user()->created_at->format('d/m/Y') }}</p> --}}
+                    <p>Data de Cadastro: {{ auth()->user()->created_at->format('d/m/Y') }}</p>
+                    <p>Image, {{ Auth::user()->image }}</p> --}}
                     
                     <div class="flex justify-between align-center">
                     {{-- Filters --}}
