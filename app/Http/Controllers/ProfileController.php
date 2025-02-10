@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -32,7 +33,33 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Checks if the user uploaded a profile photo
+        if($request->hasFile('image')) {
+            // Deletes the old image if it exists
+            if ($request->user()->image != 'default.jpg') {
+                // The old image path is stored in the database
+                Storage::delete('profile_pictures/' . $request->user()->image);  // Remove a imagem antiga
+            }
+            // Gets the uploaded file
+            $image = $request->file('image');
+            // Create a unique name
+            $imageUniqueName = uniqid('profile_', true) . '.' . $image->getClientOriginalExtension();
+            // Saves to the storage/app/public/profile_pictures folder
+            $uploadedFiles = $image->storeAs('profile_pictures', $imageUniqueName);
+        }
+
+        // Access the authenticated user
+        $user = $request->user();
+
+        // Updates the user with the request data (including the unique name of the image, if it has been changed
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'image' => $imageUniqueName
+        ];
+    
+        // Updates the user with the data in the associative array
+        $user->update($data);
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

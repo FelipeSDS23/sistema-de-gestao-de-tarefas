@@ -19,8 +19,8 @@
         <!-- Image -->
         <div class="mt-4">
             <x-input-label for="image" :value="__('Foto')" />
-            <x-file-input id="image" />
-            <x-input-error :messages="$errors->get('file')" class="mt-2" />
+            <x-image-input id="image" />
+            <x-input-error :messages="$errors->get('image')" class="mt-2" />
         </div>
 
         <!-- Password -->

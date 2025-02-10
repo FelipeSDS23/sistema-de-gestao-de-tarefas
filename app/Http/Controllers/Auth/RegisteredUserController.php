@@ -33,14 +33,14 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         // Checks if the user uploaded a profile photo
-        if($request->file('file')) {
+        if($request->file('image')) {
             // Gets the uploaded file
-            $image = $request->file('file');
+            $image = $request->file('image');
             // Create a unique name
             $imageUniqueName = uniqid('profile_', true) . '.' . $image->getClientOriginalExtension();
             // Saves to the storage/app/public/profile_pictures folder
