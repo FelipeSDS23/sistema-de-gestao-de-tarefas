@@ -18,7 +18,9 @@ class TaskController extends Controller
     {
         //
         $user = User::find(Auth::user()->id);
-        $tasks = $user->tasks;
+
+        // !!!!!!!!!!!!!!!!!! CODAR FILTROS AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $tasks = $user->tasks()->orderBy('created_at', 'desc')->get();
 
         $tasks = $tasks->map(function ($task) {
             $task->created_date = Carbon::parse($task->created_at)->format('d/m/Y');
