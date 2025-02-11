@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -15,7 +17,37 @@ class TaskController extends Controller
     public function index()
     {
         //
-        return view('tasks');
+        $user = User::find(Auth::user()->id);
+        $tasks = $user->tasks;
+
+        $tasks = $tasks->map(function ($task) {
+            $task->created_date = Carbon::parse($task->created_at)->format('d/m/Y');
+        
+            // Parse and reset the time for both created_at and deadline
+            $deadline = Carbon::parse($task->deadline)->startOfDay();
+            $currentDate = Carbon::now('America/Sao_Paulo')->startOfDay();
+        
+            $task->deadline = $deadline->format('Y-m-d'); // Format the deadline as 'Y-m-d'
+        
+            $taskStyleClass = '';
+        
+            // Logic for determining the task style class based on the deadline and status
+            if ($deadline->isBefore($currentDate)) {
+                $taskStyleClass = 'bg-red-500';
+            } elseif ($task->status == 'Pendente') {
+                $taskStyleClass = 'bg-yellow-500';
+            } elseif ($task->status == 'Concluída') {
+                $taskStyleClass = 'bg-green-500';
+            }
+
+            $task->deadline = $deadline->format('d/m/Y'); // Format the deadline as 'd/m/Y'
+        
+            $task->taskStyleClass = $taskStyleClass;
+        
+            return $task;
+        });        
+
+        return view('tasks', ['tasks' => $tasks]);
     }
 
     /**
