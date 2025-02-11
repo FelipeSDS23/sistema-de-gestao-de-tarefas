@@ -36,7 +36,7 @@
                         </form>
 
                         <div>
-                            <a href="{{ route('dashboard.create') }}">
+                            <a href="{{ route('tasks.create') }}">
                                 <button class="bg-blue-500 px-3 h-10 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
                                     Nova tarefa
                                     <span class="material-symbols-outlined px-2">add_circle</span>
@@ -111,12 +111,46 @@
                                     <p class="my-1">Expira em: 20/01/2024</p>
                                 </div>
                                 <div>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">timer</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                timer
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Iniciar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                task_alt
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Completar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                edit_square
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Editar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                delete
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Remover</span>
+                                    </span>
                                 </div>
                             </div>
+
+
+
                             <!-- Card 3 -->
                             <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg flex justify-between align-center  transform hover:translate-y-[-5px] transition duration-300">
                                 <div>
@@ -127,12 +161,46 @@
                                     <p class="my-1">Expira em: 20/01/2024</p>
                                 </div>
                                 <div>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">timer</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                timer
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Iniciar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                task_alt
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Completar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                edit_square
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Editar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                delete
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Remover</span>
+                                    </span>
                                 </div>
                             </div>
+
+
+                            
                             <!-- Card 4 -->
                             <div class="bg-pink-500 text-white p-6 rounded-lg shadow-lg">
                                 <h5 class="text-xl font-semibold">Card 4</h5>
@@ -230,5 +298,5 @@
             </div>
         </div>
     </div>
-    
+
 </x-app-layout>

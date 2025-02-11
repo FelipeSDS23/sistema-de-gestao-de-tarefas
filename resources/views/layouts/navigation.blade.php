@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.tasks')" :active="request()->routeIs('dashboard.tasks')">
+                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                         {{ __('Gerenciar Tarefas') }}
                     </x-nav-link>
                 </div>

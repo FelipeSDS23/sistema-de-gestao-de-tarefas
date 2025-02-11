@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="flex justify-center py-6">
-                    <a href="{{ route('dashboard.tasks') }}">
+                    <a href="{{ route('tasks.index') }}">
                         <button class="bg-blue-600 text-white font-bold py-1 px-2 sm:py-3 sm:px-6 rounded-lg shadow-lg animate-[pulse-grow_1.5s_infinite]">
                             Ver minhas tarefas
                         </button>

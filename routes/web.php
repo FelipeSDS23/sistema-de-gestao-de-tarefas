@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -10,21 +12,12 @@ Route::get('/', function () {
 
 // Private App routes
 Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function() {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    Route::get('/tasks', function() {
-        return view('tasks');
-    })->name('dashboard.tasks');
-
-    Route::get('/config', function() {
-        return view('config');
-    })->name('dashboard.config');
-
-    Route::get('/create', function() {
-        return view('create');
-    })->name('dashboard.create');
+    // App routes
+    Route::get('/', [AppController::class, 'index'])->name('dashboard');
+    Route::get('/config', [AppController::class, 'config'])->name('dashboard.config');
+    
+    // Tasks routes
+    Route::resource('tasks', TaskController::class);
 });
 
 // Authentication routes

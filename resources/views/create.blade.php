@@ -12,7 +12,7 @@
 
                     <h2 class="text-2xl font-semibold text-center mb-6">Nova tarefa</h2>
 
-                    <form action="#" method="POST">
+                    <form action="{{ route('tasks.store') }}" method="POST">
                         @csrf
                         <div class="mb-4">
                             <label for="nome" class="block text-sm font-medium text-gray-700">Nome da Tarefa (máximo 30 caracteres):</label>
