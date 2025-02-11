@@ -59,9 +59,41 @@
                                     <p class="my-1">Expira em: 20/01/2024</p>
                                 </div>
                                 <div>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
-                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                timer
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Iniciar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                task_alt
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Completar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                edit_square
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Editar</span>
+                                    </span>
+
+                                    <span class="tooltip">
+                                        <a href="#">
+                                            <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
+                                                delete
+                                            </span>
+                                        </a>
+                                        <span class="tooltip-text">Remover</span>
+                                    </span>
                                 </div>
                             </div>
 
@@ -79,6 +111,7 @@
                                     <p class="my-1">Expira em: 20/01/2024</p>
                                 </div>
                                 <div>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">timer</span></a></p>
                                     <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
                                     <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
                                     <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
@@ -94,6 +127,7 @@
                                     <p class="my-1">Expira em: 20/01/2024</p>
                                 </div>
                                 <div>
+                                    <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">timer</span></a></p>
                                     <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">task_alt</span></a></p>
                                     <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">edit_square</span></a></p>
                                     <p><a href="#"><span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">delete</span></a></p>
@@ -196,4 +230,5 @@
             </div>
         </div>
     </div>
+    
 </x-app-layout>

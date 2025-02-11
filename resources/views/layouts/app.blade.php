@@ -17,8 +17,11 @@
         {{-- Google icons --}}
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-        {{-- Meu Tailwind CSS --}}
+        {{-- CDN Tailwind CSS - Usar somente em desenvolvimento --}}
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+        {{-- Custom CSS --}}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     </head>
     <body class="font-sans antialiased">
