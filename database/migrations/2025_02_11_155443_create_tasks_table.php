@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->enum('status', ['Pendente', 'Em andamento', 'Concluída'])->default('Pendente');
             $table->enum('category', ['Trabalho', 'Pessoal', 'Estudos'])->default('Trabalho');
-            $table->date('deadline')->nullable();
+            $table->date('deadline');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

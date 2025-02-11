@@ -12,29 +12,66 @@
 
                     <h2 class="text-2xl font-semibold text-center mb-6">Nova tarefa</h2>
 
+                    @if (session('success'))
+                        <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-400 rounded-md text-center">
+                            <strong>{{ session('success') }}</strong>
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-400 rounded-md text-center">
+                            <strong>Corrija os erros abaixo:</strong>
+                        </div>
+                    @endif
+
                     <form action="{{ route('tasks.store') }}" method="POST">
                         @csrf
+
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                        <!-- Campo Nome da Tarefa -->
                         <div class="mb-4">
-                            <label for="nome" class="block text-sm font-medium text-gray-700">Nome da Tarefa (máximo 30 caracteres):</label>
-                            <input type="text" id="nome" name="nome" maxlength="30" class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <label for="title" class="block text-sm font-medium text-gray-700">
+                                Nome da Tarefa (máximo 30 caracteres):
+                            </label>
+                            <input type="text" id="title" name="title" maxlength="30" value="{{ old('title') }}"
+                                class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                    @error('title') border-red-500 @enderror" required>
+                            @error('title')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
             
+                        <!-- Campo Categoria -->
                         <div class="mb-4">
-                            <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria:</label>
-                            <select id="categoria" name="categoria" class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                <option value="trabalho">Trabalho</option>
-                                <option value="pessoal">Pessoal</option>
-                                <option value="estudos">Estudos</option>
+                            <label for="category" class="block text-sm font-medium text-gray-700">Categoria:</label>
+                            <select id="category" name="category"
+                                class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                    @error('category') border-red-500 @enderror" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="Trabalho" {{ old('category') == 'Trabalho' ? 'selected' : '' }}>Trabalho</option>
+                                <option value="Pessoal" {{ old('category') == 'Pessoal' ? 'selected' : '' }}>Pessoal</option>
+                                <option value="Estudos" {{ old('category') == 'Estudos' ? 'selected' : '' }}>Estudos</option>
                             </select>
+                            @error('category')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
             
+                        <!-- Campo Data Limite -->
                         <div class="mb-4">
-                            <label for="data_limite" class="block text-sm font-medium text-gray-700">Data Limite:</label>
-                            <input type="date" id="data_limite" name="data_limite" class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <label for="deadline" class="block text-sm font-medium text-gray-700">Data Limite:</label>
+                            <input type="date" id="deadline" name="deadline" value="{{ old('deadline') }}"
+                                class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                    @error('deadline') border-red-500 @enderror" required>
+                            @error('deadline')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
             
                         <div class="flex justify-center">
-                            <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <button type="submit"
+                                class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 Cadastrar Tarefa
                             </button>
                         </div>
