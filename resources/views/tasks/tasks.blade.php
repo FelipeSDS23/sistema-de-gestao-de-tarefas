@@ -10,14 +10,21 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    {{-- <h2>Gerenciar Tarefas</h2>
-                    <p>Bem-vindo, {{ Auth::user()->name }}</p>
-                    <p>Email: {{ auth()->user()->email }}</p>
-                    <p>Data de Cadastro: {{ auth()->user()->created_at->format('d/m/Y') }}</p>
-                    <p>Image, {{ Auth::user()->image }}</p> --}}
-                    
+                    {{-- Feedback messages --}}
+                    @if (session('success'))
+                        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 border border-green-300 rounded text-center">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 border border-red-300 rounded text-center">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <div class="flex justify-between align-center">
-                    {{-- Filters --}}
+                        {{-- Filters --}}
                         <form>
                             @csrf
                             <label for="filtro">
@@ -59,23 +66,17 @@
                                         <p class="my-1">Expira em: {{ $task->deadline }}</p>
                                     </div>
                                     <div>
-                                        <span class="tooltip">
-                                            <a href="#">
-                                                <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
-                                                    timer
-                                                </span>
-                                            </a>
-                                            <span class="tooltip-text">Iniciar</span>
-                                        </span>
-
-                                        <span class="tooltip">
-                                            <a href="#">
+                                        <form action="{{ route("tasks.update", ['task' => $task->id]) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="action" value="Concluída">
+                                            <button class="tooltip" type="submit">
                                                 <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
                                                     task_alt
                                                 </span>
-                                            </a>
-                                            <span class="tooltip-text">Completar</span>
-                                        </span>
+                                                <span class="tooltip-text">Completar</span>
+                                            </button>
+                                        </form>
 
                                         <span class="tooltip">
                                             <a href="#">
@@ -86,14 +87,17 @@
                                             <span class="tooltip-text">Editar</span>
                                         </span>
 
-                                        <span class="tooltip">
-                                            <a href="#">
+                                        <form action="{{ route("tasks.destroy", ['task' => $task->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="tooltip" type="submit">
                                                 <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
                                                     delete
                                                 </span>
-                                            </a>
-                                            <span class="tooltip-text">Remover</span>
-                                        </span>
+                                                <span class="tooltip-text">Remover</span>
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                                 <!-- Card end -->

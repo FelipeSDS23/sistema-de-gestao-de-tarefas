@@ -124,6 +124,24 @@ class TaskController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $task = Task::find($id);
+
+        if(!$task) {
+            return redirect()->back()->with('error', 'Tarefa não encontrada');
+        }
+
+        // Check if the action is "Completed" and update the status
+        if($request->action && $request->action == "Concluída") {
+            $task->status = "Concluída";
+            $task->save();
+            return redirect()->back()->with('success', 'Tarefa marcada como concluída');
+        }
+
+        // If it is not a specific action, update the other fields of the request
+        $task->update($request->except('action'));
+
+        return redirect()->back()->with('success', 'Tarefa atualizada com sucesso');
+
     }
 
     /**
@@ -132,5 +150,15 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         //
+        $task = Task::find($id);
+
+        if(!$task) {
+            return redirect()->back()->with('error', 'Tarefa não encontrada');
+        }
+
+        $task->delete();
+
+        return redirect()->back()->with('success', 'Tarefa excluída com sucesso');
+        
     }
 }
