@@ -21,9 +21,18 @@ class TaskController extends Controller
 
         // Filters
         if ($request->filtro) {
+            //Validation
+            $rules = [
+                'filtro' => 'nullable|in:vencimento asc,vencimento desc,status,category,asc,desc',
+            ];
+            $request->validate($rules);
+
+            // Filters
             if ($request->filtro == 'vencimento asc') {
+                // Asc filtering
                 $tasks = $user->tasks()->orderBy('deadline', 'asc')->get();
             } elseif ($request->filtro == 'vencimento desc') {
+                // Desc filtering
                 $tasks = $user->tasks()->orderBy('deadline', 'desc')->get();
             } elseif ($request->filtro == 'status') {
                 // Status filtering
@@ -97,17 +106,13 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation
         $rules = [
-            // 'user_id' => 'required|exists:users,id',
             'title' => 'required|max:30',
             'category' => 'required|in:Trabalho,Pessoal,Estudos',
             'deadline' => 'required|date|after_or_equal:today',
         ];
-
         $feedback = [
-            // 'user_id.required' => 'O campo usuário é obrigatório.',
-            // 'user_id.exists' => 'O usuário selecionado não existe no sistema.',
             'title.required' => 'O título é obrigatório.',
             'title.max' => 'O título não pode ter mais de 30 caracteres.',
             'category.required' => 'A categoria é obrigatória.',
@@ -116,10 +121,8 @@ class TaskController extends Controller
             'deadline.date' => 'A data limite deve ser uma data válida.',
             'deadline.after_or_equal' => 'A data limite deve ser hoje ou uma data futura.',
         ];
-        
         $request->validate($rules, $feedback);
 
-        // $user = User::find($request->user_id);
         $user = User::find(Auth::user()->id);
 
         $task = new Task($request->all());
@@ -170,6 +173,23 @@ class TaskController extends Controller
             $task->save();
             return redirect()->back()->with('success', 'Tarefa marcada como concluída');
         }
+
+        // Validation
+        $rules = [
+            'title' => 'required|max:30',
+            'category' => 'required|in:Trabalho,Pessoal,Estudos',
+            'deadline' => 'required|date|after_or_equal:today',
+        ];
+        $feedback = [
+            'title.required' => 'O título é obrigatório.',
+            'title.max' => 'O título não pode ter mais de 30 caracteres.',
+            'category.required' => 'A categoria é obrigatória.',
+            'category.in' => 'A categoria deve ser uma das seguintes opções: Trabalho, Pessoal ou Estudos.',
+            'deadline.required' => 'O campo data limite é obrigatório.',
+            'deadline.date' => 'A data limite deve ser uma data válida.',
+            'deadline.after_or_equal' => 'A data limite deve ser hoje ou uma data futura.',
+        ];
+        $request->validate($rules, $feedback);
 
         // If it is not a specific action, update the other fields of the request
         $task->update($request->except('action'));

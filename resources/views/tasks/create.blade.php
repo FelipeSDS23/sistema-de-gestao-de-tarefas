@@ -32,8 +32,6 @@
                     @endif
                         @csrf
 
-                        {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
-
                         <!-- Campo Nome da Tarefa -->
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">
