@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Setting;
 
 class RegisteredUserController extends Controller
 {
@@ -57,6 +58,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        // Defines the App's default settings
+        Setting::create([
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect(route('dashboard', absolute: false));
     }

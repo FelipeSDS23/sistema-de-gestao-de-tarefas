@@ -15,6 +15,7 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function() {
     // App routes
     Route::get('/', [AppController::class, 'index'])->name('dashboard');
     Route::get('/config', [AppController::class, 'config'])->name('dashboard.config');
+    Route::post('/config', [AppController::class, 'configPost'])->name('dashboard.config');
     
     // Tasks routes
     Route::resource('tasks', TaskController::class);
