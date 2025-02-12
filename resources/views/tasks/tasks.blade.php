@@ -24,7 +24,7 @@
                                 <!-- Card -->
                                 <div class="{{ $task->taskStyleClass }} text-white p-6 rounded-lg shadow-lg flex justify-between align-center  transform hover:translate-y-[-5px] transition duration-300">
                                     <div>
-                                        <h5 class="my-1 text-xl font-semibold">{{ $task->title }}</h5>
+                                        <h5 class="my-1 text-xl font-semibold break-words max-w-[250px]">{{ $task->title }}</h5>
                                         <p class="my-1">Status: {{ $task->status }}</p>
                                         <p class="my-1">{{ $task->category }}</p>
                                         <p class="my-1">Criada em: {{ $task->created_date }}</p>

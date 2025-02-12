@@ -35,9 +35,9 @@
                         <!-- Campo Nome da Tarefa -->
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">
-                                Nome da Tarefa (máximo 30 caracteres):
+                                Nome da Tarefa (máximo 50 caracteres):
                             </label>
-                            <input type="text" id="title" name="title" maxlength="30" value="{{ isset($task) ? $task->title : old('title') }}"
+                            <input type="text" id="title" name="title" maxlength="50" value="{{ isset($task) ? $task->title : old('title') }}"
                                 class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
                                     @error('title') border-red-500 @enderror" required>
                             @error('title')

@@ -111,13 +111,13 @@ class TaskController extends Controller
     {
         // Validation
         $rules = [
-            'title' => 'required|max:30',
+            'title' => 'required|max:50',
             'category' => 'required|in:Trabalho,Pessoal,Estudos',
             'deadline' => 'required|date|after_or_equal:today',
         ];
         $feedback = [
             'title.required' => 'O título é obrigatório.',
-            'title.max' => 'O título não pode ter mais de 30 caracteres.',
+            'title.max' => 'O título não pode ter mais de 50 caracteres.',
             'category.required' => 'A categoria é obrigatória.',
             'category.in' => 'A categoria deve ser uma das seguintes opções: Trabalho, Pessoal ou Estudos.',
             'deadline.required' => 'O campo data limite é obrigatório.',
@@ -191,13 +191,13 @@ class TaskController extends Controller
 
         // Validation
         $rules = [
-            'title' => 'required|max:30',
+            'title' => 'required|max:50',
             'category' => 'required|in:Trabalho,Pessoal,Estudos',
             'deadline' => 'required|date|after_or_equal:today',
         ];
         $feedback = [
             'title.required' => 'O título é obrigatório.',
-            'title.max' => 'O título não pode ter mais de 30 caracteres.',
+            'title.max' => 'O título não pode ter mais de 50 caracteres.',
             'category.required' => 'A categoria é obrigatória.',
             'category.in' => 'A categoria deve ser uma das seguintes opções: Trabalho, Pessoal ou Estudos.',
             'deadline.required' => 'O campo data limite é obrigatório.',

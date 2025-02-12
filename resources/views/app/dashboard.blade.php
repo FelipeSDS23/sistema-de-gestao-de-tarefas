@@ -38,7 +38,7 @@
                         
                         <!-- Texto ao lado da imagem -->
                         <div>
-                            <h1 class="font-bold text-blue-600 text-md md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                            <h1 class="font-bold text-blue-400 text-md md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
                                 Bem-vindo, {{ Auth::user()->name }}!
                             </h1>
                         </div>
@@ -47,7 +47,7 @@
 
                 <div class="flex justify-center py-6">
                     <a href="{{ route('tasks.index') }}">
-                        <button class="bg-blue-600 text-white font-bold py-1 px-2 sm:py-3 sm:px-6 rounded-lg shadow-lg animate-[pulse-grow_1.5s_infinite]">
+                        <button class="bg-blue-400 text-white font-bold py-1 px-2 sm:py-3 sm:px-6 rounded-lg shadow-lg animate-[pulse-grow_1.5s_infinite]">
                             Ver minhas tarefas
                         </button>
                     </a>
