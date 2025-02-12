@@ -27,7 +27,7 @@
                     <form action="{{ route('tasks.store') }}" method="POST">
                         @csrf
 
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
 
                         <!-- Campo Nome da Tarefa -->
                         <div class="mb-4">

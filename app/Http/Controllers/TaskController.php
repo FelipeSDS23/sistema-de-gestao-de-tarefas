@@ -49,7 +49,7 @@ class TaskController extends Controller
             return $task;
         });        
 
-        return view('tasks', ['tasks' => $tasks]);
+        return view('tasks.tasks', ['tasks' => $tasks]);
     }
 
     /**
@@ -58,7 +58,7 @@ class TaskController extends Controller
     public function create()
     {
         //
-        return view('create');
+        return view('tasks.create');
     }
 
     /**
@@ -68,15 +68,15 @@ class TaskController extends Controller
     {
         //
         $rules = [
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'title' => 'required|max:30',
             'category' => 'required|in:Trabalho,Pessoal,Estudos',
             'deadline' => 'required|date|after_or_equal:today',
         ];
 
         $feedback = [
-            'user_id.required' => 'O campo usuário é obrigatório.',
-            'user_id.exists' => 'O usuário selecionado não existe no sistema.',
+            // 'user_id.required' => 'O campo usuário é obrigatório.',
+            // 'user_id.exists' => 'O usuário selecionado não existe no sistema.',
             'title.required' => 'O título é obrigatório.',
             'title.max' => 'O título não pode ter mais de 30 caracteres.',
             'category.required' => 'A categoria é obrigatória.',
@@ -88,7 +88,8 @@ class TaskController extends Controller
         
         $request->validate($rules, $feedback);
 
-        $user = User::find($request->user_id);
+        // $user = User::find($request->user_id);
+        $user = User::find(Auth::user()->id);
 
         $task = new Task($request->all());
       

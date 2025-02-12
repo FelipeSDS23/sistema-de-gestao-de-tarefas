@@ -9,11 +9,11 @@ class AppController extends Controller
 {
     //
     public function index() {
-        return view('dashboard');
+        return view('app.dashboard');
     }
 
     // public function config(string $id) {
     public function config() {
-        return view('config');
+        return view('app.config');
     }
 }
