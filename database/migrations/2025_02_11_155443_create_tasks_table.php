@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 30);
             $table->enum('status', ['Pendente', 'Em andamento', 'Concluída'])->default('Pendente');
             $table->enum('category', ['Trabalho', 'Pessoal', 'Estudos'])->default('Trabalho');
             $table->date('deadline');
@@ -27,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+    
         Schema::dropIfExists('tasks');
     }
 };

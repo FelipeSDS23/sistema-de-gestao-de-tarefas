@@ -8,8 +8,9 @@
 .tooltip .tooltip-text {
     visibility: hidden;
     width: auto;
-    background-color: #60A5FA;
+    background-color: #861886 ;
     color: #fff;
+    font-weight: bold;
     text-align: center;
     border-radius: 5px;
     padding: 5px;

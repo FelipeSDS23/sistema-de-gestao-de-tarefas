@@ -69,7 +69,7 @@ class TaskController extends Controller
         //
         $rules = [
             'user_id' => 'required|exists:users,id',
-            'title' => 'required|max:255',
+            'title' => 'required|max:30',
             'category' => 'required|in:Trabalho,Pessoal,Estudos',
             'deadline' => 'required|date|after_or_equal:today',
         ];
@@ -78,7 +78,7 @@ class TaskController extends Controller
             'user_id.required' => 'O campo usuário é obrigatório.',
             'user_id.exists' => 'O usuário selecionado não existe no sistema.',
             'title.required' => 'O título é obrigatório.',
-            'title.max' => 'O título não pode ter mais de 255 caracteres.',
+            'title.max' => 'O título não pode ter mais de 30 caracteres.',
             'category.required' => 'A categoria é obrigatória.',
             'category.in' => 'A categoria deve ser uma das seguintes opções: Trabalho, Pessoal ou Estudos.',
             'deadline.required' => 'O campo data limite é obrigatório.',
