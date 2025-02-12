@@ -14,14 +14,41 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $user = User::find(Auth::user()->id);
 
-        // !!!!!!!!!!!!!!!!!! CODAR FILTROS AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        $tasks = $user->tasks()->orderBy('created_at', 'desc')->get();
+        // Filters
+        if ($request->filtro) {
+            if ($request->filtro == 'vencimento asc') {
+                $tasks = $user->tasks()->orderBy('deadline', 'asc')->get();
+            } elseif ($request->filtro == 'vencimento desc') {
+                $tasks = $user->tasks()->orderBy('deadline', 'desc')->get();
+            } elseif ($request->filtro == 'status') {
+                // Status filtering
+                $pendente = $user->tasks()->where('status', 'Pendente')->orderBy('created_at', 'desc')->get();
+                $concluida = $user->tasks()->where('status', 'Concluída')->orderBy('created_at', 'desc')->get();
+                $tasks = $pendente->merge($concluida);
+            } elseif ($request->filtro == 'category') {
+                // Filtering by category
+                $trabalho = $user->tasks()->where('category', 'Trabalho')->orderBy('created_at', 'desc')->get();
+                $pessoal = $user->tasks()->where('category', 'Pessoal')->orderBy('created_at', 'desc')->get();
+                $estudos = $user->tasks()->where('category', 'Estudos')->orderBy('created_at', 'desc')->get();
+                $tasks = $trabalho->merge($pessoal)->merge($estudos);
+            } elseif ($request->filtro == 'asc') {
+                // Ascending order
+                $tasks = $user->tasks()->orderBy('created_at', 'asc')->get();
+            } elseif ($request->filtro == 'desc') {
+                // Descending sort
+                $tasks = $user->tasks()->orderBy('created_at', 'desc')->get();
+            }
+        } else {
+            // If there is no filter, returns the tasks ordered by descending creation date
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->get();
+        }
 
+        // Formats dates for display and assigns color class according to task deadline
         $tasks = $tasks->map(function ($task) {
             $task->created_date = Carbon::parse($task->created_at)->format('d/m/Y');
         

@@ -22,20 +22,23 @@
                             {{ session('error') }}
                         </div>
                     @endif
-
+                    
+                    {{-- Options bar --}}
                     <div class="flex justify-between align-center">
                         {{-- Filters --}}
-                        <form>
+                        <form action="{{ route('tasks.index') }}" method="GET">
                             @csrf
                             <label for="filtro">
                                 <span class="material-symbols-outlined">filter_list</span>
                             </label>
                             <select id="filtro" name="filtro" class="w-0 h-10">
                                 <option value=""></option>
+                                <option value="vencimento asc">Vencimento (mais antigo)</option>
+                                <option value="vencimento desc">Vencimento (mais recente)</option>
                                 <option value="status">Status</option>
-                                <option value="categoria">Categoria</option>
-                                <option value="data-criacao-mais-antigo">Data de criação (Mais antigo)</option>
-                                <option value="data-criacao-mais-recente">Data de criação (Mais recente)</option>
+                                <option value="category">Categoria</option>
+                                <option value="asc">Data de criação (Mais antigo)</option>
+                                <option value="desc">Data de criação (Mais recente)</option>
                             </select>
                             <button type="submit" class="bg-blue-500 px-3 h-10 text-white">
                                 Aplicar
@@ -51,6 +54,28 @@
                             </a>
                         </div>
                     </div>
+                    {{-- Subtitles --}}
+                    <div class="flex space-x-6 items-center my-5">
+                        <!-- Tarefa Completa -->
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+                            <span class="ml-2 text-gray-700 text-sm">Tarefa Completa</span>
+                        </div>
+
+                        <!-- Tarefa Vencendo -->
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                            <span class="ml-2 text-gray-700 text-sm">Tarefa Vencendo</span>
+                        </div>
+
+                        <!-- Tarefa Vencida -->
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                            <span class="ml-2 text-gray-700 text-sm">Tarefa Vencida</span>
+                        </div>
+                    </div>
+
+
 
                     <div class="container mx-auto mt-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-4">
@@ -89,10 +114,10 @@
                                             </button>
                                         </form>
 
-                                        <form action="{{ route("tasks.destroy", ['task' => $task->id]) }}" method="POST">
+                                        <form action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="POST" id="delete-form-{{ $task->id }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="tooltip" type="submit">
+                                            <button class="tooltip" type="button" onclick="confirmDelete({{ $task->id }})">
                                                 <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
                                                     delete
                                                 </span>
