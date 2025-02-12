@@ -77,6 +77,28 @@ APP_FALLBACK_LOCALE=pt-BR
 ### 4. Configure o banco de dados
 
 ```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.seu-servico-de-email.com
+MAIL_PORT=587
+MAIL_USERNAME=seu-email@dominio.com
+MAIL_PASSWORD=sua-senha
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=seu-email@dominio.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+* MAIL_MAILER: O tipo de transporte de e-mail (usualmente smtp).
+* MAIL_HOST: O servidor SMTP do seu provedor de e-mail.
+* MAIL_PORT: A porta para o servidor SMTP (geralmente 587 para TLS, 465 para SSL).
+* MAIL_USERNAME: Seu nome de usuário de e-mail.
+* MAIL_PASSWORD: A senha do seu e-mail.
+* MAIL_ENCRYPTION: O tipo de criptografia, como tls ou ssl.
+* MAIL_FROM_ADDRESS: O endereço de e-mail que será usado para enviar as mensagens.
+* MAIL_FROM_NAME: O nome que será exibido ao lado do e-mail.
+
+### 5. Configure o banco de dados
+
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -85,25 +107,25 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 5. Gere as chaves de aplicativo
+### 6. Gere as chaves de aplicativo
 
 ```bash
 php artisan key:generate
 ```
 
-### 6. Execute as migrações do banco de dados
+### 7. Execute as migrações do banco de dados
 
 ```bash
 php artisan migrate
 ```
 
-### 7. Compile os assets do frontend
+### 8. Compile os assets do frontend
 
 ```bash
 npm run dev
 ```
 
-### 8. Execute o servidor de desenvolvimento
+### 9. Execute o servidor de desenvolvimento
 
 ```bash
 php artisan serve
