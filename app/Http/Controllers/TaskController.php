@@ -116,6 +116,13 @@ class TaskController extends Controller
     public function edit(string $id)
     {
         //
+        $task = Task::find($id);
+
+        if(!$task) {
+            return redirect()->back()->with('error', 'Tarefa não encontrada');
+        }
+
+        return view('tasks.create', ['task' => $task]);
     }
 
     /**
@@ -140,7 +147,7 @@ class TaskController extends Controller
         // If it is not a specific action, update the other fields of the request
         $task->update($request->except('action'));
 
-        return redirect()->back()->with('success', 'Tarefa atualizada com sucesso');
+        return redirect()->route('tasks.index')->with('success', 'Tarefa atualizada com sucesso');
 
     }
 

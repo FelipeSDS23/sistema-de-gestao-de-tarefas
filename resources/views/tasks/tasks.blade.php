@@ -78,14 +78,16 @@
                                             </button>
                                         </form>
 
-                                        <span class="tooltip">
-                                            <a href="#">
+                                        <form action="{{ route("tasks.edit", ['task' => $task]) }}" method="GET">
+                                            @csrf
+                                            <input type="hidden" name="action" value="Edit">
+                                            <button class="tooltip" type="submit">
                                                 <span class="py-1 my-1 transform hover:scale-110 transition duration-300 cursor-pointer text-right material-symbols-outlined">
                                                     edit_square
                                                 </span>
-                                            </a>
-                                            <span class="tooltip-text">Editar</span>
-                                        </span>
+                                                <span class="tooltip-text">Editar</span>
+                                            </button>
+                                        </form>
 
                                         <form action="{{ route("tasks.destroy", ['task' => $task->id]) }}" method="POST">
                                             @csrf

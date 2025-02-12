@@ -24,7 +24,12 @@
                         </div>
                     @endif
 
+                    @if (isset($task))
+                    <form action="{{ route('tasks.update', ['task' => $task->id]) }}" method="POST">
+                        @method('PATCH')
+                    @else
                     <form action="{{ route('tasks.store') }}" method="POST">
+                    @endif
                         @csrf
 
                         {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
@@ -34,7 +39,7 @@
                             <label for="title" class="block text-sm font-medium text-gray-700">
                                 Nome da Tarefa (máximo 30 caracteres):
                             </label>
-                            <input type="text" id="title" name="title" maxlength="30" value="{{ old('title') }}"
+                            <input type="text" id="title" name="title" maxlength="30" value="{{ isset($task) ? $task->title : old('title') }}"
                                 class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
                                     @error('title') border-red-500 @enderror" required>
                             @error('title')
@@ -49,19 +54,20 @@
                                 class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
                                     @error('category') border-red-500 @enderror" required>
                                 <option value="">Selecione uma categoria</option>
-                                <option value="Trabalho" {{ old('category') == 'Trabalho' ? 'selected' : '' }}>Trabalho</option>
-                                <option value="Pessoal" {{ old('category') == 'Pessoal' ? 'selected' : '' }}>Pessoal</option>
-                                <option value="Estudos" {{ old('category') == 'Estudos' ? 'selected' : '' }}>Estudos</option>
+                                <option value="Trabalho" {{ (isset($task) && $task->category == 'Trabalho') || old('category') == 'Trabalho' ? 'selected' : '' }}>Trabalho</option>
+                                <option value="Pessoal" {{ (isset($task) && $task->category == 'Pessoal') || old('category') == 'Pessoal' ? 'selected' : '' }}>Pessoal</option>
+                                <option value="Estudos" {{ (isset($task) && $task->category == 'Estudos') || old('category') == 'Estudos' ? 'selected' : '' }}>Estudos</option>
                             </select>
                             @error('category')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+
             
                         <!-- Campo Data Limite -->
                         <div class="mb-4">
                             <label for="deadline" class="block text-sm font-medium text-gray-700">Data Limite:</label>
-                            <input type="date" id="deadline" name="deadline" value="{{ old('deadline') }}"
+                            <input type="date" id="deadline" name="deadline" value="{{ isset($task) ? $task->deadline : old('deadline') }}"
                                 class="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
                                     @error('deadline') border-red-500 @enderror" required>
                             @error('deadline')
@@ -72,7 +78,11 @@
                         <div class="flex justify-center">
                             <button type="submit"
                                 class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                Cadastrar Tarefa
+                                @if (isset($task))
+                                    Atualizar Tarefa
+                                @else
+                                    Cadastrar Tarefa
+                                @endif
                             </button>
                         </div>
                     </form>
