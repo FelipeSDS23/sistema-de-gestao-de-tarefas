@@ -74,15 +74,14 @@ APP_LOCALE=pt_BR
 APP_FALLBACK_LOCALE=pt-BR
 ```
 
-### 4. Configure o banco de dados
+### 4. Configure o envio de e-mails
 
 ```bash
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.seu-servico-de-email.com
-MAIL_PORT=587
+MAIL_PORT=porta-do-seu-smtp
 MAIL_USERNAME=seu-email@dominio.com
 MAIL_PASSWORD=sua-senha
-MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=seu-email@dominio.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
@@ -92,7 +91,6 @@ MAIL_FROM_NAME="${APP_NAME}"
 * MAIL_PORT: A porta para o servidor SMTP (geralmente 587 para TLS, 465 para SSL).
 * MAIL_USERNAME: Seu nome de usuário de e-mail.
 * MAIL_PASSWORD: A senha do seu e-mail.
-* MAIL_ENCRYPTION: O tipo de criptografia, como tls ou ssl.
 * MAIL_FROM_ADDRESS: O endereço de e-mail que será usado para enviar as mensagens.
 * MAIL_FROM_NAME: O nome que será exibido ao lado do e-mail.
 
@@ -103,8 +101,8 @@ DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=sistema_de_gestao_de_tarefas
-DB_USERNAME=root
-DB_PASSWORD=
+DB_USERNAME=seu_nome_de_usuário
+DB_PASSWORD=sua_senha
 ```
 
 ### 6. Gere as chaves de aplicativo
@@ -119,13 +117,21 @@ php artisan key:generate
 php artisan migrate
 ```
 
-### 8. Compile os assets do frontend
+### 8. Configurado o link simbólico da pasta storage
+
+As fotos de perfil dos usuários são armazenadas no diretório public/storage/profile_pictures, portanto, certifique-se de ter configurado o link simbólico da pasta storage:
 
 ```bash
-npm run dev
+php artisan storage:link
 ```
 
-### 9. Execute o servidor de desenvolvimento
+### 9. Compile os assets do frontend
+
+```bash
+npm run build
+```
+
+### 10. Execute o servidor de desenvolvimento
 
 ```bash
 php artisan serve
@@ -136,11 +142,7 @@ Acesse o aplicativo através de http://localhost:8000.
 * Observações
 * O sistema utiliza Laravel Breeze para autenticação de usuários.
 * Para tradução do Laravel Breeze, foi utilizado o pacote lucascudo/laravel-pt-br-localization. Certifique-se de que a tradução esteja corretamente configurada no seu ambiente.
-* As fotos de perfil dos usuários são armazenadas no diretório public/storage/profile_pictures, portanto, certifique-se de ter configurado o link simbólico da pasta storage:
 
-```bash
-php artisan storage:link
-```
 Filtros de Tarefas
 No painel de tarefas, você pode filtrar as tarefas com base em vários critérios:
 
