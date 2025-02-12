@@ -1,66 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestão de Tarefas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este é um sistema de gestão de tarefas construído com o framework Laravel. Ele implementa funcionalidades de CRUD (Create, Read, Update, Delete) de tarefas com autenticação e autorização utilizando o Laravel Breeze, além de notificações por e-mail e upload de arquivos de perfil.
 
-## About Laravel
+<p align="center"><img src="./screenshots/tarefas.png" alt="Sistema de Gestão de Tarefas"></p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Funcionalidades
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **CRUD de Tarefas:** Criação, leitura, atualização e exclusão de tarefas.
+- **Autenticação e Autorização:** Usando Laravel Breeze para autenticação de usuários.
+- **Relacionamentos no Banco de Dados:** Relacionamento entre usuários e tarefas, e entre usuários e configurações do app.
+- **Upload de Arquivos:** Permite o upload de fotos de perfil do usuário durante o registro e a edição.
+- **Notificações por E-mail:** Notificações enviadas por e-mail quando tarefas são criadas ou editadas.
+- **Status das Tarefas:** As tarefas podem ser marcadas como pendentes ou concluídas.
+- **Categorias de Tarefas:** Categorias de tarefas, como trabalho, pessoal e estudos.
+- **Filtros de Tarefas:** É possível filtrar as tarefas por:
+  - Vencimento (mais antigo)
+  - Vencimento (mais recente)
+  - Status (pendente ou concluída)
+  - Categoria (trabalho, pessoal, estudos)
+  - Data de criação (mais antigo)
+  - Data de criação (mais recente)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologias Utilizadas
 
-## Learning Laravel
+- **Laravel 11**
+- **MySQL** como banco de dados
+- **Blade** como engine de templates
+- **Laravel Breeze** para autenticação e autorização
+- **Tailwind CSS** para estilização do frontend
+- **Laravel Notification** para notificações por e-mail
+- **Google Fonts** para ícones personalizados
+- **Laravel-pt-br-localization** para tradução do Laravel Breeze
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Pré-requisitos
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP >= 8.1
+- Composer
+- MySQL
+- Node.js e NPM (para compilar os assets do frontend)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalação
 
-## Laravel Sponsors
+Siga os passos abaixo para rodar o projeto localmente.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone o repositório
 
-### Premium Partners
+```bash
+git clone https://github.com/FelipeSDS23/sistema-de-gestao-de-tarefas.git
+cd sistema-de-gestao-de-tarefas
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2. Instale as dependências
 
-## Contributing
+```bash
+composer install
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Configure o ambiente
 
-## Code of Conduct
+Crie um arquivo .env baseado no .env.example e ajuste as configurações conforme necessário:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+Edite o arquivo .env e altere as seguintes variáveis de ambiente:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+FILESYSTEM_DISK=public
+APP_TIMEZONE=America/Sao_Paulo
+APP_LOCALE=pt_BR
+APP_FALLBACK_LOCALE=pt-BR
+```
 
-## License
+### 4. Configure o banco de dados
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sistema_de_gestao_de_tarefas
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Gere as chaves de aplicativo
+
+```bash
+php artisan key:generate
+```
+
+### 6. Execute as migrações do banco de dados
+
+```bash
+php artisan migrate
+```
+
+### 7. Compile os assets do frontend
+
+```bash
+npm run dev
+```
+
+### 8. Execute o servidor de desenvolvimento
+
+```bash
+php artisan serve
+```
+
+Acesse o aplicativo através de http://localhost:8000.
+
+* Observações
+* O sistema utiliza Laravel Breeze para autenticação de usuários.
+* Para tradução do Laravel Breeze, foi utilizado o pacote lucascudo/laravel-pt-br-localization. Certifique-se de que a tradução esteja corretamente configurada no seu ambiente.
+* As fotos de perfil dos usuários são armazenadas no diretório public/storage/profile_pictures, portanto, certifique-se de ter configurado o link simbólico da pasta storage:
+
+```bash
+php artisan storage:link
+```
+Filtros de Tarefas
+No painel de tarefas, você pode filtrar as tarefas com base em vários critérios:
+
+* Vencimento (mais antigo): Ordena as tarefas pela data de vencimento, do mais antigo para o mais recente.
+* Vencimento (mais recente): Ordena as tarefas pela data de vencimento, do mais recente para o mais antigo.
+* Status: Filtra as tarefas de acordo com seu status (pendente ou concluída).
+* Categoria: Filtra as tarefas com base na categoria (trabalho, pessoal, estudos).
+* Data de Criação (mais antigo): Ordena as tarefas pela data de criação, do mais antigo para o mais recente.
+* Data de Criação (mais recente): Ordena as tarefas pela data de criação, do mais recente para o mais antigo.
+
+Imagens
+
+Veja abaixo algumas imagens que ilustram a interface do sistema:
+
+Tela Inicial
+<img src="./screenshots/tela_inicial.png" alt="Tela inicial">
+
+Tela de Login
+<img src="./screenshots/login.png" alt="Login">
+
+Tela de Registro
+<img src="./screenshots/registro.png" alt="Registro">
+
+Dashboard
+<img src="./screenshots/dashboard.png" alt="Dashboard">
+
+Lista de Tarefas
+<img src="./screenshots/tarefas.png" alt="Tarefas">
+
+Configurações do Usuário
+<img src="./screenshots/configuracoes.png" alt="Configurações">
+
+Filtros de Tarefas
+<img src="./screenshots/filtros.png" alt="Filtros">
+
+Edição de Perfil
+<img src="./screenshots/edicao_de_perfil_1.png" alt="Edição do Perfil">
+
+Ícones
+Os ícones utilizados no sistema são da Google Fonts. Acesse a página para consultar ou alterar os ícones:
+
+<a href="https://fonts.google.com/icons" target="_blank">Google Fonts Icons</a>
+
