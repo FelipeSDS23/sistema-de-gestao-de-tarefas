@@ -18,14 +18,14 @@
                         @csrf
                         <div class="mb-6">
                             <label for="receber_email_tarefa_criada" class="inline-flex items-center text-sm font-medium text-gray-700">
-                                <input type="checkbox" id="receber_email_tarefa_criada" name="receber_email_tarefa_criada" class="form-checkbox h-5 w-5 text-blue-500 focus:ring-2 focus:ring-blue-500 border-gray-300 rounded-md" checked />
+                                <input type="checkbox" id="receber_email_tarefa_criada" name="receber_email_tarefa_criada" class="form-checkbox h-5 w-5 text-blue-500 focus:ring-2 focus:ring-blue-500 border-gray-300 rounded-md" {{ $setting->send_email_on_create ? 'checked' : '' }} />
                                 <span class="ml-2">Receber e-mail quando a tarefa for criada</span>
                             </label>
                         </div>
                     
                         <div class="mb-6">
                             <label for="receber_email_tarefa_editada" class="inline-flex items-center text-sm font-medium text-gray-700">
-                                <input type="checkbox" id="receber_email_tarefa_editada" name="receber_email_tarefa_editada" class="form-checkbox h-5 w-5 text-blue-500 focus:ring-2 focus:ring-blue-500 border-gray-300 rounded-md" />
+                                <input type="checkbox" id="receber_email_tarefa_editada" name="receber_email_tarefa_editada" class="form-checkbox h-5 w-5 text-blue-500 focus:ring-2 focus:ring-blue-500 border-gray-300 rounded-md" {{ $setting->send_email_on_edit ? 'checked' : '' }} />
                                 <span class="ml-2">Receber e-mail quando a tarefa for editada</span>
                             </label>
                         </div>

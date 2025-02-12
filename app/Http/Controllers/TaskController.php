@@ -8,6 +8,9 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\Setting;
+use App\Mail\AppEmail;
+use Illuminate\Support\Facades\Mail;
 
 class TaskController extends Controller
 {
@@ -129,6 +132,18 @@ class TaskController extends Controller
       
         $user->tasks()->save($task);
 
+        // Sends email if the user has activated this option
+        $settings = Setting::where('user_id', Auth::user()->id)->get();
+        if($settings->first()->send_email_on_create) {
+            $taskTitle = $request->get('title');
+            $dados = [
+                'nome' => Auth::user()->name,
+                'mensagem' => "A tarefa $taskTitle foi criada com sucesso!"
+            ];
+            Mail::to(Auth::user()->email)->send(new AppEmail($dados));
+        }
+
+
         return redirect()->route('tasks.create')->with('success', 'Tarefa criada com sucesso!');
     }
 
@@ -193,6 +208,17 @@ class TaskController extends Controller
 
         // If it is not a specific action, update the other fields of the request
         $task->update($request->except('action'));
+
+        // Sends email if the user has activated this option
+        $settings = Setting::where('user_id', Auth::user()->id)->get();
+        if($settings->first()->send_email_on_edit) {
+            $taskTitle = $request->get('title');
+            $dados = [
+                'nome' => Auth::user()->name,
+                'mensagem' => "A tarefa $taskTitle foi editada com sucesso!"
+            ];
+            Mail::to(Auth::user()->email)->send(new AppEmail($dados));
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Tarefa atualizada com sucesso');
 
