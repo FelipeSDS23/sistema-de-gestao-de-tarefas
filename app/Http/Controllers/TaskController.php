@@ -25,29 +25,33 @@ class TaskController extends Controller
         $tasks = $tasks->map(function ($task) {
             $task->created_date = Carbon::parse($task->created_at)->format('d/m/Y');
         
-            // Parse and reset the time for both created_at and deadline
+            // Parse and adjust dates
             $deadline = Carbon::parse($task->deadline)->startOfDay();
             $currentDate = Carbon::now('America/Sao_Paulo')->startOfDay();
+            
+            // Calculation of the difference in days between today and the deadline
+            $daysRemaining = $currentDate->diffInDays($deadline, false);
         
-            $task->deadline = $deadline->format('Y-m-d'); // Format the deadline as 'Y-m-d'
+            $task->deadline = $deadline->format('d/m/Y'); // Format deadline as 'd/m/Y'
         
             $taskStyleClass = '';
         
-            // Logic for determining the task style class based on the deadline and status
-            if ($deadline->isBefore($currentDate)) {
-                $taskStyleClass = 'bg-red-500';
-            } elseif ($task->status == 'Pendente') {
-                $taskStyleClass = 'bg-yellow-500';
-            } elseif ($task->status == 'Concluída') {
-                $taskStyleClass = 'bg-green-500';
+            // Logic to set color based on date and status
+            if ($task->status == 'Concluída') {
+                $taskStyleClass = 'bg-blue-500';
+            } elseif ($daysRemaining < 0) { 
+                $taskStyleClass = 'bg-red-500'; // Late
+            } elseif ($daysRemaining <= 5) {
+                $taskStyleClass = 'bg-yellow-500'; // 5 days or less left
+            } else {
+                $taskStyleClass = 'bg-green-500'; // More than 5 days to expire
             }
-
-            $task->deadline = $deadline->format('d/m/Y'); // Format the deadline as 'd/m/Y'
         
             $task->taskStyleClass = $taskStyleClass;
         
             return $task;
-        });        
+        });
+                
 
         return view('tasks.tasks', ['tasks' => $tasks]);
     }
