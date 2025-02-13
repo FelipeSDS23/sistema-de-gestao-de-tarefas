@@ -149,6 +149,9 @@ Veja abaixo algumas imagens que ilustram a interface do sistema:
 Tela Inicial
 <img src="./screenshots/tela_inicial.png" alt="Tela inicial">
 
+Tela Mobile
+<img src="./screenshots/mobile.png" alt="Tela inicial Mobile">
+
 Tela de Login
 <img src="./screenshots/login.png" alt="Login">
 
