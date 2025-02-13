@@ -167,6 +167,12 @@ Configurações do Usuário
 Filtros de Tarefas
 <img src="./screenshots/filtros.png" alt="Filtros">
 
+Ordenação de Tarefas
+<img src="./screenshots/ordenacao.png" alt="Ordenação">
+
+Paginação
+<img src="./screenshots/paginacao.png" alt="Paginação">
+
 Edição de Perfil
 <img src="./screenshots/edicao_de_perfil_1.png" alt="Edição do Perfil">
 
