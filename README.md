@@ -144,7 +144,7 @@ Acesse o aplicativo através de http://localhost:8000.
 
 Imagens
 
-Veja abaixo algumas imagens que ilustram a interface do sistema:
+Veja abaixo algumas imagens da interface do sistema:
 
 Tela Inicial
 <img src="./screenshots/tela_inicial.png" alt="Tela inicial">
