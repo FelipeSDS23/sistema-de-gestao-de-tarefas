@@ -20,7 +20,9 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $tasks = $user->tasks()->get(); // 🔹 Recupera todas as tarefas do usuário
+
+        // 🔹 Recupera as tarefas do usuário e aplica paginação
+        $tasksQuery = $user->tasks();
 
         // 🔹 Validação dos inputs
         $request->validate([
@@ -28,75 +30,70 @@ class TaskController extends Controller
             'order' => 'nullable|in:vencimento asc,vencimento desc,asc,desc',
         ]);
 
-        // 🔹 Aplicação de Filtros (mantém o resultado filtrado na variável $tasks)
+        // 🔹 Aplicação de Filtros
         if ($request->filter) {
-            $tasks = $tasks->filter(function ($task) use ($request) {
-                return match ($request->filter) {
-                    'completo' => $task->status === 'Concluída',
-                    'pendente' => $task->status === 'Pendente',
-                    'trabalho' => $task->category === 'Trabalho',
-                    'pessoal'  => $task->category === 'Pessoal',
-                    'estudos'  => $task->category === 'Estudos',
-                    default    => true,
+            $tasksQuery = $tasksQuery->where(function ($query) use ($request) {
+                match ($request->filter) {
+                    'completo' => $query->where('status', 'Concluída'),
+                    'pendente' => $query->where('status', 'Pendente'),
+                    'trabalho' => $query->where('category', 'Trabalho'),
+                    'pessoal'  => $query->where('category', 'Pessoal'),
+                    'estudos'  => $query->where('category', 'Estudos'),
+                    default    => null,
                 };
             });
         }
 
-        // 🔹 Aplicação de Ordenação sobre a variável já filtrada
+        // 🔹 Aplicação de Ordenação
         if ($request->order) {
-            $tasks = match ($request->order) {
-                'vencimento asc'  => $tasks->sortBy('deadline'),
-                'vencimento desc' => $tasks->sortByDesc('deadline'),
-                'asc'             => $tasks->sortBy('created_at'),
-                'desc'            => $tasks->sortByDesc('created_at'),
-                default           => $tasks,
+            match ($request->order) {
+                'vencimento asc'  => $tasksQuery->orderBy('deadline', 'asc'),
+                'vencimento desc' => $tasksQuery->orderBy('deadline', 'desc'),
+                'asc'             => $tasksQuery->orderBy('created_at', 'asc'),
+                'desc'            => $tasksQuery->orderBy('created_at', 'desc'),
+                default           => null,
             };
         } else {
             // Ordem padrão: mais recente primeiro
-            $tasks = $tasks->sortByDesc('created_at');
+            $tasksQuery->orderBy('created_at', 'desc');
         }
 
-        // 🔹 Reindexa a coleção para evitar problemas com chaves
-        $tasks = $tasks->values();
+        // 🔹 Paginação
+        $tasks = $tasksQuery->paginate(9); // Aqui você pode alterar o número de tarefas por página
 
-
-        
-
-
-
-        // Formats dates for display and assigns color class according to task deadline
-        $tasks = $tasks->map(function ($task) {
+        // 🔹 Formatação das tarefas
+        $tasks->getCollection()->transform(function ($task) {
             $task->created_date = Carbon::parse($task->created_at)->format('d/m/Y');
-        
-            // Parse and adjust dates
+            
+            // Parse e ajusta as datas
             $deadline = Carbon::parse($task->deadline)->startOfDay();
             $currentDate = Carbon::now('America/Sao_Paulo')->startOfDay();
             
-            // Calculation of the difference in days between today and the deadline
+            // Cálculo da diferença em dias
             $daysRemaining = $currentDate->diffInDays($deadline, false);
-        
-            $task->deadline = $deadline->format('d/m/Y'); // Format deadline as 'd/m/Y'
-        
+            
+            $task->deadline = $deadline->format('d/m/Y'); // Formata a data limite
+            
+            // Lógica para definir a classe de cor
             $taskStyleClass = '';
-        
-            // Logic to set color based on date and status
             if ($task->status == 'Concluída') {
                 $taskStyleClass = 'bg-blue-500';
             } elseif ($daysRemaining < 0) { 
-                $taskStyleClass = 'bg-red-500'; // Late
+                $taskStyleClass = 'bg-red-500'; // Atrasada
             } elseif ($daysRemaining <= 5) {
-                $taskStyleClass = 'bg-yellow-500'; // 5 days or less left
+                $taskStyleClass = 'bg-yellow-500'; // Faltando 5 dias ou menos
             } else {
-                $taskStyleClass = 'bg-green-500'; // More than 5 days to expire
+                $taskStyleClass = 'bg-green-500'; // Mais de 5 dias para expirar
             }
-        
+            
             $task->taskStyleClass = $taskStyleClass;
-        
+            
             return $task;
         });
-                
 
+        // 🔹 Retorna a view com as tarefas paginadas
         return view('tasks.tasks', ['tasks' => $tasks]);
+
     }
 
     /**
