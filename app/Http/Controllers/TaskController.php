@@ -19,46 +19,64 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
+        $tasksQuery = $user->tasks(); // Inicializa a query
 
-        // Filters
-        if ($request->filtro) {
-            //Validation
-            $rules = [
-                'filtro' => 'nullable|in:vencimento asc,vencimento desc,status,category,asc,desc',
-            ];
-            $request->validate($rules);
+        // Validação dos inputs
+        $request->validate([
+            'filter' => 'nullable|in:completo,pendente,trabalho,pessoal,estudos',
+            'order' => 'nullable|in:vencimento asc,vencimento desc,asc,desc',
+        ]);
 
-            // Filters
-            if ($request->filtro == 'vencimento asc') {
-                // Asc filtering
-                $tasks = $user->tasks()->orderBy('deadline', 'asc')->get();
-            } elseif ($request->filtro == 'vencimento desc') {
-                // Desc filtering
-                $tasks = $user->tasks()->orderBy('deadline', 'desc')->get();
-            } elseif ($request->filtro == 'status') {
-                // Status filtering
-                $pendente = $user->tasks()->where('status', 'Pendente')->orderBy('created_at', 'desc')->get();
-                $concluida = $user->tasks()->where('status', 'Concluída')->orderBy('created_at', 'desc')->get();
-                $tasks = $pendente->merge($concluida);
-            } elseif ($request->filtro == 'category') {
-                // Filtering by category
-                $trabalho = $user->tasks()->where('category', 'Trabalho')->orderBy('created_at', 'desc')->get();
-                $pessoal = $user->tasks()->where('category', 'Pessoal')->orderBy('created_at', 'desc')->get();
-                $estudos = $user->tasks()->where('category', 'Estudos')->orderBy('created_at', 'desc')->get();
-                $tasks = $trabalho->merge($pessoal)->merge($estudos);
-            } elseif ($request->filtro == 'asc') {
-                // Ascending order
-                $tasks = $user->tasks()->orderBy('created_at', 'asc')->get();
-            } elseif ($request->filtro == 'desc') {
-                // Descending sort
-                $tasks = $user->tasks()->orderBy('created_at', 'desc')->get();
+        // 🔹 Aplicação de Filtros
+        if ($request->filter) {
+            switch ($request->filter) {
+                case 'completo':
+                    $tasksQuery->where('status', 'Concluída');
+                    break;
+                case 'pendente':
+                    $tasksQuery->where('status', 'Pendente');
+                    break;
+                case 'trabalho':
+                    $tasksQuery->where('category', 'Trabalho');
+                    break;
+                case 'pessoal':
+                    $tasksQuery->where('category', 'Pessoal');
+                    break;
+                case 'estudos':
+                    $tasksQuery->where('category', 'Estudos');
+                    break;
+            }
+        }
+
+        // dd($tasksQuery);
+        // 🔹 Aplicação de Ordenação
+        if ($request->order) {
+            switch ($request->order) {
+                case 'vencimento asc':
+                    $tasksQuery->orderBy('deadline', 'asc');
+                    break;
+                case 'vencimento desc':
+                    $tasksQuery->orderBy('deadline', 'desc');
+                    break;
+                case 'asc':
+                    $tasksQuery->orderBy('created_at', 'asc');
+                    break;
+                case 'desc':
+                    $tasksQuery->orderBy('created_at', 'desc');
+                    break;
             }
         } else {
-            // If there is no filter, returns the tasks ordered by descending creation date
-            $tasks = $user->tasks()->orderBy('created_at', 'desc')->get();
+            // Ordem padrão: mais recente primeiro
+            $tasksQuery->orderBy('created_at', 'desc');
         }
+
+        // 🔹 Executa a query final
+        $tasks = $tasksQuery->get();
+
+        
+
+
 
         // Formats dates for display and assigns color class according to task deadline
         $tasks = $tasks->map(function ($task) {
