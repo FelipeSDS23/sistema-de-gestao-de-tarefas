@@ -50,7 +50,7 @@
 
                 {{-- Botão de Limpar filtros --}}
                 <div class="w-35 sm:w-auto flex justify-center sm:justify-start">
-                    <a href="{{ route('tasks.index') }}" class="bg-gray-500 text-white text-xs sm:text-sm px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors w-35 sm:w-auto flex items-center justify-center">
+                    <a href="{{ route('tasks.index') }}" class="bg-blue-400 text-white text-xs sm:text-sm px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors w-35 sm:w-auto flex items-center justify-center">
                         Limpar
                         <span class="material-symbols-outlined px-2">clear</span>
                     </a>
