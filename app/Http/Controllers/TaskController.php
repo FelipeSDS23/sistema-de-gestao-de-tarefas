@@ -20,59 +20,45 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $tasksQuery = $user->tasks(); // Inicializa a query
+        $tasks = $user->tasks()->get(); // 🔹 Recupera todas as tarefas do usuário
 
-        // Validação dos inputs
+        // 🔹 Validação dos inputs
         $request->validate([
             'filter' => 'nullable|in:completo,pendente,trabalho,pessoal,estudos',
             'order' => 'nullable|in:vencimento asc,vencimento desc,asc,desc',
         ]);
 
-        // 🔹 Aplicação de Filtros
+        // 🔹 Aplicação de Filtros (mantém o resultado filtrado na variável $tasks)
         if ($request->filter) {
-            switch ($request->filter) {
-                case 'completo':
-                    $tasksQuery->where('status', 'Concluída');
-                    break;
-                case 'pendente':
-                    $tasksQuery->where('status', 'Pendente');
-                    break;
-                case 'trabalho':
-                    $tasksQuery->where('category', 'Trabalho');
-                    break;
-                case 'pessoal':
-                    $tasksQuery->where('category', 'Pessoal');
-                    break;
-                case 'estudos':
-                    $tasksQuery->where('category', 'Estudos');
-                    break;
-            }
+            $tasks = $tasks->filter(function ($task) use ($request) {
+                return match ($request->filter) {
+                    'completo' => $task->status === 'Concluída',
+                    'pendente' => $task->status === 'Pendente',
+                    'trabalho' => $task->category === 'Trabalho',
+                    'pessoal'  => $task->category === 'Pessoal',
+                    'estudos'  => $task->category === 'Estudos',
+                    default    => true,
+                };
+            });
         }
 
-        // dd($tasksQuery);
-        // 🔹 Aplicação de Ordenação
+        // 🔹 Aplicação de Ordenação sobre a variável já filtrada
         if ($request->order) {
-            switch ($request->order) {
-                case 'vencimento asc':
-                    $tasksQuery->orderBy('deadline', 'asc');
-                    break;
-                case 'vencimento desc':
-                    $tasksQuery->orderBy('deadline', 'desc');
-                    break;
-                case 'asc':
-                    $tasksQuery->orderBy('created_at', 'asc');
-                    break;
-                case 'desc':
-                    $tasksQuery->orderBy('created_at', 'desc');
-                    break;
-            }
+            $tasks = match ($request->order) {
+                'vencimento asc'  => $tasks->sortBy('deadline'),
+                'vencimento desc' => $tasks->sortByDesc('deadline'),
+                'asc'             => $tasks->sortBy('created_at'),
+                'desc'            => $tasks->sortByDesc('created_at'),
+                default           => $tasks,
+            };
         } else {
             // Ordem padrão: mais recente primeiro
-            $tasksQuery->orderBy('created_at', 'desc');
+            $tasks = $tasks->sortByDesc('created_at');
         }
 
-        // 🔹 Executa a query final
-        $tasks = $tasksQuery->get();
+        // 🔹 Reindexa a coleção para evitar problemas com chaves
+        $tasks = $tasks->values();
+
 
         
 
