@@ -14,12 +14,11 @@ Este é um sistema de gestão de tarefas construído com o framework Laravel. El
 - **Status das Tarefas:** As tarefas podem ser marcadas como pendentes ou concluídas.
 - **Categorias de Tarefas:** Categorias de tarefas, como trabalho, pessoal e estudos.
 - **Filtros de Tarefas:** É possível filtrar as tarefas por:
-  - Vencimento (mais antigo)
-  - Vencimento (mais recente)
-  - Status (pendente ou concluída)
-  - Categoria (trabalho, pessoal, estudos)
-  - Data de criação (mais antigo)
-  - Data de criação (mais recente)
+  - Status: Pendentes ou Concluídas.
+  - Categoria: Trabalho, Pessoal, ou Estudos.
+- **Ordenação de Tarefas:** É possível ordenar as tarefas por:
+  - Vencimento: Ordenação por vencimento, do mais antigo para o mais recente (Ascendente) ou do mais recente para o mais antigo (Descendente).
+  - Data de Criação: Ordenação pela data de criação, do mais antigo para o mais recente (Ascendente) ou do mais recente para o mais antigo (Descendente).
 
 ## Tecnologias Utilizadas
 
@@ -142,16 +141,6 @@ Acesse o aplicativo através de http://localhost:8000.
 * Observações
 * O sistema utiliza Laravel Breeze para autenticação de usuários.
 * Para tradução do Laravel Breeze, foi utilizado o pacote lucascudo/laravel-pt-br-localization. Certifique-se de que a tradução esteja corretamente configurada no seu ambiente.
-
-Filtros de Tarefas
-No painel de tarefas, você pode filtrar as tarefas com base em vários critérios:
-
-* Vencimento (mais antigo): Ordena as tarefas pela data de vencimento, do mais antigo para o mais recente.
-* Vencimento (mais recente): Ordena as tarefas pela data de vencimento, do mais recente para o mais antigo.
-* Status: Filtra as tarefas de acordo com seu status (pendente ou concluída).
-* Categoria: Filtra as tarefas com base na categoria (trabalho, pessoal, estudos).
-* Data de Criação (mais antigo): Ordena as tarefas pela data de criação, do mais antigo para o mais recente.
-* Data de Criação (mais recente): Ordena as tarefas pela data de criação, do mais recente para o mais antigo.
 
 Imagens
 
