@@ -10,7 +10,7 @@ Este é um sistema de gestão de tarefas construído com o framework Laravel. El
 - **Autenticação e Autorização:** Usando Laravel Breeze para autenticação de usuários.
 - **Relacionamentos no Banco de Dados:** Relacionamento entre usuários e tarefas, e entre usuários e configurações do app.
 - **Upload de Arquivos:** Permite o upload de fotos de perfil do usuário durante o registro e a edição.
-- **Notificações por E-mail:** Notificações enviadas por e-mail quando tarefas são criadas ou editadas.
+- **Notificações por E-mail:** Notificações enviadas por e-mail quando tarefas são criadas ou editadas (pode ser desativado nas configurações).
 - **Status das Tarefas:** As tarefas podem ser marcadas como pendentes ou concluídas.
 - **Categorias de Tarefas:** Categorias de tarefas, como trabalho, pessoal e estudos.
 - **Filtros de Tarefas:** É possível filtrar as tarefas por:
