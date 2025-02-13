@@ -80,36 +80,37 @@
                         </div>
                     </div>
 
-                    {{-- Paginação --}}
+                    {{-- Pagination --}}
                     <div class="mt-4">
                         <div class="flex justify-center">
                             <nav role="navigation" aria-label="Pagination" class="flex items-center space-x-4">
-                                {{-- Página anterior --}}
-                                <a href="{{ $tasks->previousPageUrl() }}" 
-                                    class="px-4 py-2 text-sm font-semibold text-white bg-blue-400 hover:bg-blue-700 rounded-md">
+                                {{-- Previous page --}}
+                                <a href="{{ $tasks->previousPageUrl() . '&' . http_build_query(request()->except('page')) }}"
+                                    class="px-4 py-2 text-sm font-semibold text-white bg-blue-400 hover:bg-blue-500 rounded-md">
                                     Anterior
                                 </a>
-                    
-                                {{-- Links das páginas --}}
-                                @foreach(range(1, $tasks->lastPage()) as $page)
-                                    <a href="{{ $tasks->url($page) }}" 
+
+                                {{-- Page links --}}
+                                @foreach (range(1, $tasks->lastPage()) as $page)
+                                    <a href="{{ $tasks->url($page) . '&' . http_build_query(request()->except('page')) }}"
                                         class="px-4 py-2 text-sm font-semibold 
                                         {{ $tasks->currentPage() == $page ? 'text-white bg-blue-400' : 'text-blue-500 bg-white hover:bg-blue-200' }} 
                                         rounded-md">
                                         {{ $page }}
                                     </a>
                                 @endforeach
-                    
-                                {{-- Página seguinte --}}
-                                <a href="{{ $tasks->nextPageUrl() }}" 
-                                    class="px-4 py-2 text-sm font-semibold text-white bg-blue-400 hover:bg-blue-700 rounded-md">
+
+                                {{-- Next page --}}
+                                <a href="{{ $tasks->nextPageUrl() . '&' . http_build_query(request()->except('page')) }}"
+                                    class="px-4 py-2 text-sm font-semibold text-white bg-blue-400 hover:bg-blue-500 rounded-md">
                                     Próxima
                                 </a>
                             </nav>
                         </div>
                     </div>
-                    
-                    
+
+
+
                 </div>
             </div>
         </div>

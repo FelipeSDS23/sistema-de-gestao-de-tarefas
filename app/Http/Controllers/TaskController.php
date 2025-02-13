@@ -92,7 +92,7 @@ class TaskController extends Controller
         });
 
         // 🔹 Retorna a view com as tarefas paginadas
-        return view('tasks.tasks', ['tasks' => $tasks]);
+        return view('tasks.tasks', ['tasks' => $tasks, 'request' => $request]);
 
     }
 
