@@ -10,7 +10,7 @@
             <div class="flex gap-4 w-full sm:w-auto items-center min-w-max bg-gray-100 p-2 rounded-md">
 
                 {{-- Filter --}}
-                <div class="flex items-center gap-2 w-full sm:w-auto min-w-[200px]">
+                <div class="flex items-center gap-2 mx-3 w-full sm:w-auto min-w-[200px]">
                     <label for="filtroSelecionado" class="text-xs sm:text-sm">
                         <span class="material-symbols-outlined">
                             filter_list
@@ -31,7 +31,7 @@
                 </div>
 
                 {{-- Sort --}}
-                <div class="flex items-center gap-2 w-full sm:w-auto min-w-[200px]">
+                <div class="flex items-center gap-2 mx-3 w-full sm:w-auto min-w-[200px]">
                     <label for="ordemSelecionada" class="text-xs sm:text-sm">
                         <span class="material-symbols-outlined">
                             sort
@@ -52,7 +52,7 @@
                 </div>
 
                 {{-- Apply button --}}
-                <div class="w-full sm:w-auto flex justify-center sm:justify-start">
+                <div class="w-full sm:w-auto flex justify-center sm:justify-start ml-5">
                     <button type="submit"
                         class="bg-blue-400 text-white text-xs sm:text-sm px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors w-full sm:w-44 flex items-center justify-center">
                         Aplicar
