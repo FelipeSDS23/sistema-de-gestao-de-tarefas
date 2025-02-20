@@ -33,7 +33,7 @@
                     <div class="flex items-center justify-center sm:justify-start space-x-4">
                         <!-- Imagem do usuário -->
                         <div>
-                            <img src="{{ Auth::user()->image ? asset('storage/profile_pictures/' . Auth::user()->image) : asset('storage/profile_pictures/default.jpg') }}" alt="Profile" class="profile-photo">
+                            <img src="{{ (Auth::user()->image != 'default.jpg') ? asset('storage/profile_pictures/' . Auth::user()->image) : asset('images/default/default.jpg') }}" alt="Profile" class="profile-photo">
                         </div>
                         
                         <!-- Texto ao lado da imagem -->
