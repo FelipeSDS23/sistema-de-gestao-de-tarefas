@@ -159,13 +159,17 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Task $task)
     {
-        //
-        $task = Task::find($id);
-
+        
+        // Check if the task exists
         if(!$task) {
             return redirect()->back()->with('error', 'Tarefa não encontrada');
+        }
+
+        // Checks if the user is the owner of the task
+        if($task->user_id != Auth::user()->id) {
+            return view('acesso-negado');
         }
 
         return view('tasks.create', ['task' => $task]);
@@ -174,13 +178,17 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
-        $task = Task::find($id);
 
+        // Check if the task exists
         if(!$task) {
             return redirect()->back()->with('error', 'Tarefa não encontrada');
+        }
+
+        // Checks if the user is the owner of the task
+        if($task->user_id != Auth::user()->id) {
+            return view('acesso-negado');
         }
 
         // Check if the action is "Completed" and update the status
@@ -228,13 +236,16 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
-        //
-        $task = Task::find($id);
-
+        // Check if the task exists
         if(!$task) {
             return redirect()->back()->with('error', 'Tarefa não encontrada');
+        }
+
+        // Checks if the user is the owner of the task
+        if($task->user_id != Auth::user()->id) {
+            return view('acesso-negado');
         }
 
         $task->delete();
